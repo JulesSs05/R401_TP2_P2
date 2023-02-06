@@ -1,6 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation and Contributors.
 // Licensed under the MIT License.
 
+using ClientRestAvecEtat.ViewModels;
+using CommunityToolkit.Mvvm.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -36,6 +39,12 @@ namespace ClientRestAvecEtat
         public App()
         {
             this.InitializeComponent();
+
+            Ioc.Default.ConfigureServices(
+                 new ServiceCollection()
+                 .AddSingleton<AddSeriePage>()
+                 .BuildServiceProvider()
+            );
         }
 
         /// <summary>
@@ -45,9 +54,23 @@ namespace ClientRestAvecEtat
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
             m_window = new MainWindow();
+            // Create a Frale to act the navigation context and navigate to the first page
+            Frame rootFrame = new Frame();
+            // Place the frmae in the current Window
+            this.m_window.Content = rootFrame;
+            // Ensure the current window is active
             m_window.Activate();
+            // Navigate to the first page
+            rootFrame.Navigate(typeof(AddSeriePage));
+
+            MainRoot = m_window.Content as FrameworkElement;
         }
 
         private Window m_window;
+        public static FrameworkElement MainRoot { get; private set; }
+        public AddSeriePage ConvertisseurEuroVM
+        {
+            get { return Ioc.Default.GetService<AddSeriePage>(); }
+        }
     }
 }
