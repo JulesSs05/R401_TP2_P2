@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ClientRestAvecEtat (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "ClientRestAvecEtat (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
