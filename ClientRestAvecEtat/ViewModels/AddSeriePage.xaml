@@ -11,39 +11,58 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
 
-    <RelativePanel Height="1000">
+    <RelativePanel Height="2000">
         <TextBlock
-            Margin="12,0"
+            Margin="12,20"
             RelativePanel.AlignHorizontalCenterWithPanel="True"
             Text="Titre" />
-        <TextBox Margin="12,40" RelativePanel.AlignHorizontalCenterWithPanel="True" />
+        <TextBox
+            Width="400"
+            Margin="12,45"
+            RelativePanel.AlignHorizontalCenterWithPanel="True" />
         <TextBlock
             Margin="12,80"
             RelativePanel.AlignHorizontalCenterWithPanel="True"
             Text="Resume" />
-        <TextBox Margin="12,120" RelativePanel.AlignHorizontalCenterWithPanel="True" />
-        <TextBlock
-            Margin="12,160"
-            RelativePanel.AlignHorizontalCenterWithPanel="True"
-            Text="NB saison(s)" />
-        <TextBox Margin="12,200" RelativePanel.AlignHorizontalCenterWithPanel="True" />
+        <TextBox
+            Width="400"
+            Height="100"
+            Margin="12,120"
+            RelativePanel.AlignHorizontalCenterWithPanel="True" />
         <TextBlock
             Margin="12,240"
             RelativePanel.AlignHorizontalCenterWithPanel="True"
-            Text="NB épisode(s)" />
-        <TextBox Margin="12,280" RelativePanel.AlignHorizontalCenterWithPanel="True" />
+            Text="NB saison(s)" />
+        <TextBox
+            Width="100"
+            Margin="12,280"
+            RelativePanel.AlignHorizontalCenterWithPanel="True" />
         <TextBlock
             Margin="12,320"
             RelativePanel.AlignHorizontalCenterWithPanel="True"
-            Text="Année création" />
-        <TextBox Margin="12,360" RelativePanel.AlignHorizontalCenterWithPanel="True" />
+            Text="NB episode(s)" />
+        <TextBox
+            Width="100"
+            Margin="12,360"
+            RelativePanel.AlignHorizontalCenterWithPanel="True" />
         <TextBlock
             Margin="12,400"
             RelativePanel.AlignHorizontalCenterWithPanel="True"
-            Text="Chaine" />
-        <TextBox Margin="12,440" RelativePanel.AlignHorizontalCenterWithPanel="True" />
-        <Button
+            Text="Annee creation" />
+        <TextBox
+            Width="100"
+            Margin="12,440"
+            RelativePanel.AlignHorizontalCenterWithPanel="True" />
+        <TextBlock
             Margin="12,480"
+            RelativePanel.AlignHorizontalCenterWithPanel="True"
+            Text="Chaine" />
+        <TextBox
+            Width="200"
+            Margin="12,520"
+            RelativePanel.AlignHorizontalCenterWithPanel="True" />
+        <Button
+            Margin="12,580"
             Content="Ajouter"
             RelativePanel.AlignHorizontalCenterWithPanel="True" />
     </RelativePanel>
