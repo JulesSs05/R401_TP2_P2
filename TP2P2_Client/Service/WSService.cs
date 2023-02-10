@@ -1,5 +1,4 @@
-﻿using ClientRestAvecEtat.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -7,9 +6,9 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.Media.Protection.PlayReady;
+using TP2P2_Client.Models;
 
-namespace ClientRestAvecEtat.Services
+namespace TP2P2_Client.Service
 {
     public class WSService : IService
     {
@@ -34,11 +33,10 @@ namespace ClientRestAvecEtat.Services
         {
             using var response = await client.DeleteAsync($"/api/series/{id}");
 
-            if (response.IsSuccessStatusCode)
+            if(response.IsSuccessStatusCode)
             {
                 return response;
-            }
-            else
+            } else
             {
                 return null;
             }
@@ -52,11 +50,10 @@ namespace ClientRestAvecEtat.Services
         public async Task<HttpResponseMessage> PostSerieAsync(Serie serie)
         {
             using var response = await client.PostAsJsonAsync("/api/series", serie);
-            if (response.IsSuccessStatusCode)
+            if(response.IsSuccessStatusCode)
             {
                 return response;
-            }
-            else
+            } else
             {
                 return new HttpResponseMessage(System.Net.HttpStatusCode.NotModified);
             }
@@ -64,12 +61,11 @@ namespace ClientRestAvecEtat.Services
 
         public async Task<HttpResponseMessage> PutSerieAsync(Serie serie, int id)
         {
-            using var response = await client.PostAsJsonAsync($"/api/series/{id}", serie);
-            if (response.IsSuccessStatusCode)
+            using var response = await client.PutAsJsonAsync($"/api/series/{id}", serie); 
+            if(response.IsSuccessStatusCode)
             {
                 return response;
-            }
-            else
+            } else
             {
                 return new HttpResponseMessage(System.Net.HttpStatusCode.NotModified);
             }

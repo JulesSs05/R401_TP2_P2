@@ -1,15 +1,15 @@
-﻿using ClientRestAvecEtat;
-using ClientRestAvecEtat.Services;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TP2P2_Client.Service;
 
 namespace TP2P2_Client.ViewModels
 {
@@ -29,10 +29,10 @@ namespace TP2P2_Client.ViewModels
             get { return ((App)Application.Current).ObjWSService; }
         }
 
-        public async Task<ContentDialog> ShowAsync(String title, String message, bool? closeBtn)
+        internal async void ShowAsync(String title, String message, bool closeBtn)
         {
             ContentDialog msgDialog = new ContentDialog();
-            if (closeBtn == null)
+            if (closeBtn == true)
             {
                 msgDialog = new ContentDialog()
                 {
@@ -49,11 +49,23 @@ namespace TP2P2_Client.ViewModels
                 };
             }
 
-
-
             msgDialog.XamlRoot = App.MainRoot.XamlRoot;
             await msgDialog.ShowAsync();
-            return msgDialog;
+        }
+
+        internal async Task<ContentDialogResult> ConfirmDialog(string action)
+        {
+            ContentDialog confirmDialog = new ContentDialog
+            {
+                Title = $"Voulez-vous vraiment {action} ?",
+                PrimaryButtonText = "Oui",
+                CloseButtonText = "Annuler"
+            };
+
+            confirmDialog.XamlRoot = App.MainRoot.XamlRoot;
+            ContentDialogResult result = await confirmDialog.ShowAsync();
+
+            return result;
         }
 
         internal abstract void BtnActionSerie();

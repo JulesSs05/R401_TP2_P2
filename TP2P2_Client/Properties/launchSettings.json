@@ -1,9 +1,9 @@
 {
   "profiles": {
-    "ClientRestAvecEtat (Package)": {
+    "TP2P2_Client (Package)": {
       "commandName": "MsixPackage"
     },
-    "ClientRestAvecEtat (Unpackaged)": {
+    "TP2P2_Client (Unpackaged)": {
       "commandName": "Project"
     }
   }

@@ -1,37 +1,19 @@
 ﻿// Copyright (c) Microsoft Corporation and Contributors.
 // Licensed under the MIT License.
 
-using ClientRestAvecEtat.Services;
 using CommunityToolkit.Mvvm.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using Microsoft.UI.Xaml.Shapes;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+using TP2P2_Client.Service;
 using TP2P2_Client.ViewModels;
 using TP2P2_Client.Views;
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace ClientRestAvecEtat
+namespace TP2P2_Client
 {
-    /// <summary>
-    /// Provides application-specific behavior to supplement the default Application class.
-    /// </summary>
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
@@ -43,10 +25,15 @@ namespace ClientRestAvecEtat
         {
             get { return Ioc.Default.GetService<AjoutSerieVM>(); }
         }
+
+        public RUD RUD
+        {
+            get { return Ioc.Default.GetService<RUD>(); }
+        }
         public IService ObjWSService
         {
             get { return new WSService("https://apiseriesjulsil.azurewebsites.net"); }
-        }
+        } 
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -59,6 +46,7 @@ namespace ClientRestAvecEtat
             Ioc.Default.ConfigureServices(
                 new ServiceCollection()
                 .AddSingleton<AjoutSerieVM>()
+                .AddSingleton<RUD>()
                 .AddSingleton<IService, WSService>()
                 .BuildServiceProvider());
         }
@@ -79,7 +67,7 @@ namespace ClientRestAvecEtat
 
             m_window.Activate();
 
-            rootFrame.Navigate(typeof(AjoutSeriePage));
+            rootFrame.Navigate(typeof(RUDPage));
         }
 
         private Window m_window;

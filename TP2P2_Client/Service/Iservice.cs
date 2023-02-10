@@ -1,12 +1,12 @@
-﻿using ClientRestAvecEtat.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using TP2P2_Client.Models;
 
-namespace ClientRestAvecEtat.Services
+namespace TP2P2_Client.Service
 {
     public interface IService
     {
@@ -15,5 +15,6 @@ namespace ClientRestAvecEtat.Services
         Task<HttpResponseMessage> PostSerieAsync(Serie serie);
         Task<HttpResponseMessage> DeleteSerieAsync(int id);
         Task<Serie> GetSerieAsync(int id);
+
     }
 }
