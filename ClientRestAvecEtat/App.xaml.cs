@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation and Contributors.
 // Licensed under the MIT License.
 
-using ClientRestAvecEtat.ViewModels;
+using ClientRestAvecEtat.Services;
 using CommunityToolkit.Mvvm.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
@@ -17,6 +17,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TP2P2_Client.ViewModels;
+using TP2P2_Client.Views;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -30,8 +32,22 @@ namespace ClientRestAvecEtat
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
+    /// <summary>
+    /// Provides application-specific behavior to supplement the default Application class.
+    /// </summary>
     public partial class App : Application
     {
+        public static FrameworkElement MainRoot { get; private set; }
+
+        public AjoutSerieVM AjoutSerie
+        {
+            get { return Ioc.Default.GetService<AjoutSerieVM>(); }
+        }
+        public IService ObjWSService
+        {
+            get { return new WSService("https://apiseriesjulsil.azurewebsites.net"); }
+        }
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -41,10 +57,10 @@ namespace ClientRestAvecEtat
             this.InitializeComponent();
 
             Ioc.Default.ConfigureServices(
-                 new ServiceCollection()
-                 .AddSingleton<AddSeriePage>()
-                 .BuildServiceProvider()
-            );
+                new ServiceCollection()
+                .AddSingleton<AjoutSerieVM>()
+                .AddSingleton<IService, WSService>()
+                .BuildServiceProvider());
         }
 
         /// <summary>
@@ -54,23 +70,18 @@ namespace ClientRestAvecEtat
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
             m_window = new MainWindow();
-            // Create a Frale to act the navigation context and navigate to the first page
             Frame rootFrame = new Frame();
-            // Place the frmae in the current Window
+
             this.m_window.Content = rootFrame;
-            // Ensure the current window is active
-            m_window.Activate();
-            // Navigate to the first page
-            rootFrame.Navigate(typeof(AddSeriePage));
 
             MainRoot = m_window.Content as FrameworkElement;
+
+
+            m_window.Activate();
+
+            rootFrame.Navigate(typeof(AjoutSeriePage));
         }
 
         private Window m_window;
-        public static FrameworkElement MainRoot { get; private set; }
-        public AddSeriePage ConvertisseurEuroVM
-        {
-            get { return Ioc.Default.GetService<AddSeriePage>(); }
-        }
     }
 }

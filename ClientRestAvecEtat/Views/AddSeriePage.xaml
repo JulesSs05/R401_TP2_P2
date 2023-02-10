@@ -1,0 +1,56 @@
+<!--  Copyright (c) Microsoft Corporation and Contributors.  -->
+<!--  Licensed under the MIT License.  -->
+
+<Page
+    x:Class="TP2P2_Client.Views.AjoutSeriePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:TP2P2_Client.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    mc:Ignorable="d">
+
+    <Grid>
+        <StackPanel Margin="0,25">
+            <StackPanel Margin="25,10">
+                <TextBlock HorizontalTextAlignment="Center" Text="Titre" />
+                <TextBox Text="{Binding SerieToAdd.Titre, Mode=TwoWay}" />
+            </StackPanel>
+            <StackPanel Margin="25,10">
+                <TextBlock HorizontalTextAlignment="Center" Text="Resume" />
+                <TextBox MinHeight="150" Text="{Binding SerieToAdd.Resume, Mode=TwoWay}" />
+            </StackPanel>
+            <RelativePanel Margin="25,10" HorizontalAlignment="Center">
+                <StackPanel Name="seasonCount" Margin="12,0">
+                    <TextBlock HorizontalTextAlignment="Center" Text="Nb de saisons" />
+                    <TextBox Text="{Binding SerieToAdd.Nbsaisons, Mode=TwoWay}" />
+                </StackPanel>
+                <StackPanel
+                    Name="episodeCount"
+                    Margin="12,0"
+                    RelativePanel.RightOf="seasonCount">
+                    <TextBlock HorizontalTextAlignment="Center" Text="Nb d'episodes" />
+                    <TextBox Text="{Binding SerieToAdd.Nbepisodes, Mode=TwoWay}" />
+                </StackPanel>
+                <StackPanel
+                    Name="year"
+                    Margin="12,0"
+                    RelativePanel.RightOf="episodeCount">
+                    <TextBlock HorizontalTextAlignment="Center" Text="Annee" />
+                    <NumberBox Text="{Binding SerieToAdd.Anneecreation, Mode=TwoWay}" />
+                </StackPanel>
+            </RelativePanel>
+            <StackPanel Margin="25,10" HorizontalAlignment="Center">
+                <TextBlock HorizontalTextAlignment="Center" Text="Chaine" />
+                <TextBox MinWidth="200" Text="{Binding SerieToAdd.Network, Mode=TwoWay}" />
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Center">
+                <Button
+                    Margin="25,10"
+                    Command="{Binding BtnSetSerie}"
+                    Content="Ajouter" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>
